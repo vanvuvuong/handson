@@ -1,0 +1,42 @@
+pipeline{
+    agent{
+        label "svdg1"
+    }
+    environment {
+        def DATE=sh(script: "echo `date +'%Y-%m-%d'`", returnStdout: true).trim()
+        FROM_HOST = ""
+        USER = ""
+        PASSWORD = ""
+        DATABASE_NAME = ""
+        TO_HOST = ""
+        TO_USER = ""
+        TO_PASSWORK = ""
+        TO_DIRECTORY = ""
+    }
+    stages{
+        stage("Backup"){
+            steps{
+                echo "========Backing up database $DATABASE_NAME========"
+                mysqldump -h $FROM_HOST -u $USER -p $PASSWORD --database $DATABASE_NAME > "${DATABASE_NAME}-{$DATE}-${currentBuild.number}.sql"
+            }
+            when{
+                express { TO_HOST != "" }
+            }
+            steps{
+                echo "========Moving database $DATABASE_NAME backup to other host========"
+                sshpass -p $TO_PASSWORD scp "${DATABASE_NAME}-{$DATE}-${currentBuild.number}.sql" $TO_USER@$TO_HOST:$TO_DIRECTORY
+            }
+            post{
+                always{
+                    echo "========Done backing up database $DATABASE_NAME========"
+                }
+                success{
+                    echo "========Success backing up database $DATABASE_NAME========"
+                }
+                failure{
+                    echo "========Failed backing up database $DATABASE_NAME========"
+                }
+            }
+        }
+    }
+}

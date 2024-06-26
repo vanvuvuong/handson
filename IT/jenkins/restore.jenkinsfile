@@ -1,0 +1,44 @@
+pipeline{
+    agent{
+        label "svdg1"
+    }
+    environment {
+        def DATE=sh(script: "echo `date +'%Y-%m-%d'`", returnStdout: true).trim()
+        BACKUP_DB_NAME = ""
+        FROM_HOST = ""
+        USER = ""
+        PASSWORD = ""
+        DATABASE_NAME = ""
+        TO_HOST = ""
+        TO_USER = ""
+        TO_PASSWORK = ""
+        TO_BACKUP_DIRECTORY = ""
+    }
+    stages{
+        stage("Backup"){
+            when{
+                express { TO_HOST != "" }
+            }
+            steps{
+                echo "========Moving database $DATABASE_NAME from backup to local========"
+                sshpass -p $TO_PASSWORD scp $TO_USER@$TO_HOST:$TO_BACKUP_DIRECTORY/BACKUP_DB_NAME BACKUP_DB_NAME
+            }
+            steps{
+                echo "========Backing up database $DATABASE_NAME========"
+                mysql -h $FROM_HOST -u $USER -p $PASSWORD --database $DATABASE_NAME < BACKUP_DB_NAME
+            }
+
+            post{
+                always{
+                    echo "========Done restoring up database $DATABASE_NAME========"
+                }
+                success{
+                    echo "========Success restoring up database $DATABASE_NAME========"
+                }
+                failure{
+                    echo "========Failed restoring up database $DATABASE_NAME========"
+                }
+            }
+        }
+    }
+}

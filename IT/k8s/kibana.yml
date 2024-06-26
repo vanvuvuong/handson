@@ -1,0 +1,370 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana-kibana
+  namespace: observability
+  uid: 53188662-5f28-4757-9356-33308a22f152
+  resourceVersion: '17948958'
+  generation: 7
+  creationTimestamp: '2024-05-08T08:04:43Z'
+  labels:
+    app: kibana
+    app.kubernetes.io/managed-by: Helm
+    heritage: Helm
+    k8slens-edit-resource-version: v1
+    release: kibana
+  annotations:
+    deployment.kubernetes.io/revision: '5'
+  managedFields:
+    - manager: helm
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-05-08T08:04:43Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:heritage: {}
+            f:release: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:configchecksum: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:release: {}
+            f:spec:
+              f:automountServiceAccountToken: {}
+              f:containers:
+                k:{"name":"kibana"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"ELASTICSEARCH_HOSTS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ELASTICSEARCH_SERVICEACCOUNTTOKEN"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"NODE_OPTIONS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"SERVER_HOST"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":5601,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:runAsNonRoot: {}
+                    f:runAsUser: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/usr/share/extras"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/usr/share/kibana/config/certs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/usr/share/kibana/config/kibana.yml"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/usr/share/kibana/config/tokens"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"elasticsearch-certs"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"extras"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"kibana-tokens"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"kibanaconfig"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+    - manager: kubectl-rollout
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-06-05T07:22:37Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:template:
+            f:metadata:
+              f:annotations:
+                f:kubectl.kubernetes.io/restartedAt: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-06-05T07:28:45Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+      subresource: status
+    - manager: node-fetch
+      operation: Update
+      apiVersion: apps/v1
+      time: '2024-06-05T07:28:45Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            f:k8slens-edit-resource-version: {}
+        f:spec:
+          f:template:
+            f:spec:
+              f:containers:
+                k:{"name":"kibana"}:
+                  f:readinessProbe:
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                  f:resources:
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+  selfLink: /apis/apps/v1/namespaces/observability/deployments/kibana-kibana
+status:
+  observedGeneration: 7
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2024-06-05T07:26:02Z'
+      lastTransitionTime: '2024-05-08T08:04:43Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "kibana-kibana-6c75d8795" has successfully progressed.
+    - type: Available
+      status: 'False'
+      lastUpdateTime: '2024-06-05T07:28:45Z'
+      lastTransitionTime: '2024-06-05T07:28:45Z'
+      reason: MinimumReplicasUnavailable
+      message: Deployment does not have minimum availability.
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+      release: kibana
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kibana
+        release: kibana
+      annotations:
+        configchecksum: 32f8ecafc3226c13232489cd08366d37b1b376ca1d741a8b63d1147d9616184
+        kubectl.kubernetes.io/restartedAt: '2024-06-05T14:22:28+07:00'
+    spec:
+      volumes:
+        - name: kibana-tokens
+          emptyDir: {}
+        - name: elasticsearch-certs
+          secret:
+            secretName: elasticsearch-master-certs
+            defaultMode: 420
+        - name: kibanaconfig
+          configMap:
+            name: kibana-kibana-config
+            defaultMode: 420
+        - name: extras
+          emptyDir: {}
+      containers:
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana:8.5.1
+          ports:
+            - containerPort: 5601
+              protocol: TCP
+          env:
+            - name: ELASTICSEARCH_HOSTS
+              value: http://elasticsearch-master:9200
+            - name: ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES
+              value: /usr/share/kibana/config/certs/ca.crt
+            - name: SERVER_HOST
+              value: 0.0.0.0
+            - name: ELASTICSEARCH_SERVICEACCOUNTTOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: kibana-kibana-es-token
+                  key: token
+                  optional: false
+            - name: NODE_OPTIONS
+              value: '--max-old-space-size=1800'
+          resources:
+            limits:
+              cpu: '1'
+            requests:
+              cpu: '1'
+          volumeMounts:
+            - name: elasticsearch-certs
+              readOnly: true
+              mountPath: /usr/share/kibana/config/certs
+            - name: kibana-tokens
+              readOnly: true
+              mountPath: /usr/share/kibana/config/tokens
+            - name: kibanaconfig
+              mountPath: /usr/share/kibana/config/kibana.yml
+              subPath: kibana.yml
+            - name: extras
+              mountPath: /usr/share/extras
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - '-c'
+                - >
+                  #!/usr/bin/env bash -e
+
+
+                  # Disable nss cache to avoid filling dentry cache when calling
+                  curl
+
+                  # This is required with Kibana Docker using nss < 3.52
+
+                  export NSS_SDB_USE_CACHE=no
+
+
+                  http () {
+                      local path="${1}"
+                      set -- -XGET -s --fail -L
+
+                      if [ -n "${ELASTICSEARCH_USERNAME}" ] && [ -n "${ELASTICSEARCH_PASSWORD}" ]; then
+                        set -- "$@" -u "${ELASTICSEARCH_USERNAME}:${ELASTICSEARCH_PASSWORD}"
+                      fi
+
+                      STATUS=$(curl --output /dev/null --write-out "%{http_code}" -k "$@" "http://localhost:5601${path}")
+                      if [[ "${STATUS}" -eq 200 ]]; then
+                        exit 0
+                      fi
+
+                      echo "Error: Got HTTP code ${STATUS} but expected a 200"
+                      exit 1
+                  }
+
+
+                  http "/kibana/app/kibana"
+            initialDelaySeconds: 100
+            timeoutSeconds: 5
+            periodSeconds: 100
+            successThreshold: 3
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 1000
+            runAsNonRoot: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      automountServiceAccountToken: true
+      securityContext:
+        fsGroup: 1000
+      schedulerName: default-scheduler
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
